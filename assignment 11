@@ -1,0 +1,63 @@
+#include <stdio.h>
+
+#include <stdbool.h>
+
+#define MAX_SIZE 100
+
+bool isPrime(int num) {
+
+    if (num <= 1) {
+
+        return false;
+
+    }
+
+    for (int i = 2; i * i <= num; i++) {
+
+        if (num % i == 0) {
+
+            return false; 
+
+        }
+
+    }
+
+    return true; 
+
+}
+
+int main() {
+
+    int arr[MAX_SIZE];
+
+    int n, primeCount = 0;
+
+    printf("Enter the number of elements in the array: ");
+
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("Element %d: ", i + 1);
+
+        scanf("%d", &arr[i]);
+
+    }
+
+    for (int i = 0; i < n; i++) {
+
+        if (isPrime(arr[i])) {
+
+            primeCount++;
+
+        }
+
+    }
+
+    printf("Number of prime numbers in the array: %d\n", primeCount);
+
+return 0;
+
+}
