@@ -1,0 +1,157 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void printArray(int arr[], int n) {
+
+    printf("Array: ");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("%d ", arr[i]);
+
+    }
+
+    printf("\n");
+
+}
+
+void insertAtFront(int arr[], int *n, int value) {
+
+    for (int i = *n; i > 0; i--) {
+
+        arr[i] = arr[i - 1];
+
+    }
+
+    arr[0] = value; 
+
+    (*n)++; 
+
+}
+
+void insertAtEnd(int arr[], int *n, int value) {
+
+    arr[*n] = value;
+
+    (*n)++;
+
+}
+
+void insertAtPosition(int arr[], int *n, int value, int position) {
+
+    if (position < 0 || position > *n) {
+
+        printf("Invalid position!\n");
+
+        return;
+
+    }
+
+    for (int i = *n; i > position; i--) {
+
+        arr[i] = arr[i - 1];
+
+    }
+
+    arr[position] = value; 
+
+    (*n)++; 
+
+}
+
+int main() {
+
+    int arr[MAX_SIZE];
+
+    int n = 0; 
+
+    int choice, value, position;
+
+    printf("Enter the number of initial elements in the array: ");
+
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("Element %d: ", i + 1);
+
+        scanf("%d", &arr[i]);
+
+    }
+
+    printArray(arr, n);
+
+    do {
+
+        printf("\nChoose an insertion option:\n");
+
+        printf("1. Insert at Front\n");
+
+        printf("2. Insert at End\n");
+
+        printf("3. Insert at Any Position\n");
+
+        printf("4. Exit\n");
+
+        printf("Enter your choice: ");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1:
+
+                printf("Enter value to insert at front: ");
+
+                scanf("%d", &value);
+
+                insertAtFront(arr, &n, value);
+
+                break;
+
+            case 2:
+
+                printf("Enter value to insert at end: ");
+
+                scanf("%d", &value);
+
+                insertAtEnd(arr, &n, value);
+
+                break;
+
+            case 3:
+
+                printf("Enter value to insert: ");
+
+                scanf("%d", &value);
+
+                printf("Enter position (0 to %d): ", n);
+
+                scanf("%d", &position);
+
+                insertAtPosition(arr, &n, value, position);
+
+                break;
+
+            case 4:
+
+                printf("Exiting...\n");
+
+                break;
+
+            default:
+
+                printf("Invalid choice! Please try again.\n");
+
+        }
+
+        printArray(arr, n);
+
+    } while (choice != 4);
+
+    return 0;
+
+}
