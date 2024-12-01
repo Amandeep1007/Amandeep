@@ -1,0 +1,43 @@
+#include <stdio.h>
+
+#define MAX_STUDENTS 100
+
+int main() {
+
+    int scores[MAX_STUDENTS];
+
+    int num_students;
+
+    printf("Enter the number of students: ");
+
+    scanf("%d", &num_students);
+
+    printf("Enter the scores of the students:\n");
+
+    for (int i = 0; i < num_students; i++) {
+
+        printf("Student %d: ", i + 1);
+
+        scanf("%d", &scores[i]);
+
+    }
+
+    printf("\nScores and their even/odd status:\n");
+
+    for (int i = 0; i < num_students; i++) {
+
+        if (scores[i] % 2 == 0) {
+
+            printf("Score of Student %d (Score: %d) is Even.\n", i + 1, scores[i]);
+
+        } else {
+
+            printf("Score of Student %d (Score: %d) is Odd.\n", i + 1, scores[i]);
+
+        }
+
+    }
+
+    return 0;
+
+}
