@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+char board[3][3];
+char current_player;
+
+void initialize_board() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            board[i][j] = ' ';
+        }
+    }
+}
+
+void print_board() {
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            printf(" %c ", board[i][j]);
+            if (j < 2) printf("|");
+        }
+        printf("\n");
+        if (i < 2) printf("---|---|---\n");
+    }
+}
+
+int check_winner() {
+    for (int i = 0; i < 3; i++) {
+        if (board[i][0] == current_player && board[i][1] == current_player && board[i][2] == current_player) return 1;
+        if (board[0][i] == current_player && board[1][i] == current_player && board[2][i] == current_player) return 1;
+    }
+    if (board[0][0] == current_player && board[1][1] == current_player && board[2][2] == current_player) return 1;
+    if (board[0][2] == current_player && board[1][1] == current_player && board[2][0] == current_player) return 1;
+    return 0;
+}
+
+void switch_player() {
+    current_player = (current_player == 'X') ? 'O' : 'X';
+}
+
+int main() {
+    int row, col, moves = 0;
+    current_player = 'X';
+    initialize_board();
+
+    printf("Welcome to Tic Tac Toe!\n");
+
+    while (moves < 9) {
+        print_board();
+        printf("Player %c, enter your move (row and column): ", current_player);
+        scanf("%d %d", &row, &col);
+
+        if (row >= 0 && row < 3 && col >= 0 && col < 3 && board[row][col] == ' ') {
+            board[row][col] = current_player;
+            moves++;
+            if (check_winner()) {
+                print_board();
+                printf("Player %c wins!\n", current_player);
+                return 0;
+            }
+            switch_player();
+        } else {
+            printf("Invalid move. Try again.\n");
+        }
+    }
+
+    print_board();
+    printf("It's a tie!\n");
+    return 0;
+}
