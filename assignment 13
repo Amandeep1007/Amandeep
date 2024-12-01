@@ -1,0 +1,155 @@
+#include <stdio.h>
+
+#define MAX_SIZE 100
+
+void printArray(int arr[], int n) {
+
+    printf("Array: ");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("%d ", arr[i]);
+
+    }
+
+    printf("\n");
+
+}
+
+void deleteAtFront(int arr[], int *n) {
+
+    if (*n == 0) {
+
+        printf("Array is empty! Cannot delete from front.\n");
+
+        return;
+
+    }
+
+    for (int i = 0; i < *n - 1; i++) {
+
+        arr[i] = arr[i + 1];
+
+    }
+
+    (*n)--;
+
+}
+
+void deleteAtEnd(int arr[], int *n) {
+
+    if (*n == 0) {
+
+        printf("Array is empty! Cannot delete from end.\n");
+
+        return;
+
+    }
+
+    (*n)--;
+
+}
+
+void deleteAtPosition(int arr[], int *n, int position) {
+
+    if (position < 0 || position >= *n) {
+
+        printf("Invalid position! Cannot delete from position %d.\n", position);
+
+        return;
+
+    }
+
+    for (int i = position; i < *n - 1; i++) {
+
+        arr[i] = arr[i + 1];
+
+    }
+
+    (*n)--; 
+
+}
+
+int main() {
+
+    int arr[MAX_SIZE];
+
+    int n = 0; 
+
+    int choice, position;
+
+    printf("Enter the number of initial elements in the array: ");
+
+    scanf("%d", &n);
+
+    printf("Enter the elements of the array:\n");
+
+    for (int i = 0; i < n; i++) {
+
+        printf("Element %d: ", i + 1);
+
+        scanf("%d", &arr[i]);
+
+    }
+
+    printArray(arr, n);
+
+    do {
+
+        printf("\nChoose a deletion option:\n");
+
+        printf("1. Delete at Front\n");
+
+        printf("2. Delete at End\n");
+
+        printf("3. Delete at Any Position\n");
+
+        printf("4. Exit\n");
+
+        printf("Enter your choice: ");
+
+        scanf("%d", &choice);
+
+        switch (choice) {
+
+            case 1:
+
+                deleteAtFront(arr, &n);
+
+                break;
+
+            case 2:
+
+                deleteAtEnd(arr, &n);
+
+                break;
+
+            case 3:
+
+                printf("Enter position (0 to %d): ", n - 1);
+
+                scanf("%d", &position);
+
+                deleteAtPosition(arr, &n, position);
+
+                break;
+
+            case 4:
+
+                printf("Exiting...\n");
+
+                break;
+
+            default:
+
+                printf("Invalid choice! Please try again.\n");
+
+        }
+
+        printArray(arr, n);
+
+    } while (choice != 4);
+
+    return 0;
+
+}
